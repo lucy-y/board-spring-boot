@@ -1,0 +1,48 @@
+CREATE TABLE TB_USER(
+    SEQ BIGINT NOT NULL AUTO_INCREMENT COMMENT 'USER SEQ',
+    EMAIL VARCHAR(100) NOT NULL COMMENT '이메일 형식의 아이디',
+    PWD VARCHAR(250) NOT NULL COMMENT '비밀번호',
+    NICKNAME VARCHAR(20) NULL COMMENT '닉네임',
+	ADMIN INT NOT NULL DEFAULT 0 COMMENT '관리자 유무 0:x, 1:o',
+	REG_DATE TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성일',
+	UPD_DATE TIMESTAMP NULL COMMENT '수정일',
+	
+    CONSTRAINT PK_USER_SEQ PRIMARY KEY (SEQ)
+) DEFAULT CHARSET=utf8;
+
+CREATE TABLE TB_ARTICLE(
+    SEQ BIGINT NOT NULL AUTO_INCREMENT COMMENT 'ARTICLE SEQ',
+    WRITER VARCHAR(20) NULL COMMENT '게시글 작성자 닉네임',
+    WRITER_SEQ BIGINT NOT NULL COMMENT '게시글 작성자 SEQ',
+    TITLE VARCHAR(200) NULL COMMENT '제목',
+    CONTENT MEDIUMTEXT NULL COMMENT '게시글 내용 ',
+    REG_DATE TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '게시글 작성일',
+    UPD_DATE TIMESTAMP NULL COMMENT '게시글 수정일',
+    UPDATE_SEQ BIGINT NULL COMMENT '게시글 수정자 SEQ',
+    
+    CONSTRAINT PK_ARTICLE_SEQ PRIMARY KEY (SEQ),
+    INDEX IDX_REG_DATE (REG_DATE DESC)
+) DEFAULT CHARSET=utf8;
+
+INSERT INTO TB_USER
+  (EMAIL, PWD, NICKNAME, ADMIN, REG_DATE)
+  VALUES
+  ('loveyou_06@naver.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'lucy', 1, NOW()),
+  ('abc@abc.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'abc', 0, NOW());
+  
+  
+INSERT INTO TB_ARTICLE
+  (WRITER, WRITER_SEQ, TITLE, CONTENT, REG_DATE)
+  VALUES
+  ('abc', 2, '제목1', '내용1', NOW()),
+  ('lucy', 1, '제목2', '내용2', NOW()),
+  ('lucy', 1, '제목3', '내용3', NOW()),
+  ('lucy11', 1, '제목4', '내용4', NOW()),
+  ('lucy', 1, '제목5', '내용5', NOW()),
+  ('lucy', 1, '제목6', '내용6', NOW()),
+  ('lucy', 1, '제목7', '내용7', NOW()),
+  ('lucy', 1, '제목8', '내용8', NOW()),
+  ('lucy', 1, '제목9', '내용9', NOW()),
+  ('lucy', 1, '제목10', '내용10', NOW()),
+  ('lucy', 1, '제목11', '내용11', NOW()),
+  ('lucy', 1, '제목12', '내용12', NOW());
